@@ -26,9 +26,10 @@ jobs:
         run: |
           export PATH="$(pwd)/automated-security-helper:$PATH"
 
+          # Run ASH and capture its exit code
           ash \
             --source-dir "$(pwd)/repo" \
-            --output-dir "${{ env.ASH_OUTPUT_PATH }}"
+            --output-dir "${{ env.ASH_OUTPUT_PATH }}" || exit 1
 
       - name: Publish ${{ env.ASH_OUTPUT_PATH }}
         uses: actions/upload-artifact@v4
